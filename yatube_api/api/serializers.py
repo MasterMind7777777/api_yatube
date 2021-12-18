@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from posts.models import Post, Group, Comment, User
+from posts.models import Post, Group, Comment
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.CharField(max_length=256)
+    author = serializers.CharField(max_length=256, read_only=True)
 
     class Meta:
         model = Post
@@ -25,10 +25,3 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'author', 'post', 'text', 'created')
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'posts')
