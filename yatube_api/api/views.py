@@ -5,10 +5,10 @@ from rest_framework.response import Response
 
 from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import PermissionDenied
-from posts.models import Comment, Group, Post
+from posts.models import Comment, Group, Post, User
 from rest_framework import status
 
-from .serializers import CommentSerializer, PostSerializer, GroupSerializer
+from .serializers import CommentSerializer, PostSerializer, GroupSerializer, UserSerializer
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -99,3 +99,8 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
